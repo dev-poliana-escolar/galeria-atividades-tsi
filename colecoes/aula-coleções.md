@@ -28,6 +28,9 @@ print(nome[1])
         print(f"x:{x}, y:{y}")
     ```
 
+    - **Dicionarios**
+    Tem duas formas, com os itens e chaves e só com as chaves
+
 
 ## Dicionário
 
@@ -68,6 +71,20 @@ meu_conjunto{item1,item2}
     ```py
     meu_conjunto.remove(item1)
     ```
+
+
+## Desempacotamento em troca de variaveis
+
+```py
+a = 10
+b = 20
+
+print(f"Antes: a={a} e b={b}") #Saída:Antes: a=10 e b=20
+a, b = b, a # Troca os valores
+print(f"Depois: a={a} e b={b}")
+```
+
+## 
 
 
 
