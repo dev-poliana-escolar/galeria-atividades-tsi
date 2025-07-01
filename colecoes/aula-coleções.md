@@ -10,6 +10,25 @@ nome = ("poliana", "burra")
 print(nome[1])
 ```
 
+- Desempacotamento:
+    ```py
+    tuplas = (1,2,3)
+    a,b,c = tuplas # a = 1, b = 2, c= 3
+
+    ```
+    - Parcial
+    ```py
+    v1, *resto = (1,2,3,4) # v1 = 1 , resto =[2,3,4]
+    ```
+
+    - Looping:
+    ```py
+    lista_tuplas = [(1,2), (3,4)]
+    for x,y in lista_tuplas:
+        print(f"x:{x}, y:{y}")
+    ```
+
+
 ## Dicionário
 
 Armazena valores em pares de **chave-valor**, cada chave é **única**. São mutáveis (podem ser alterados, removidos e adicionados).
@@ -37,6 +56,18 @@ meudicionario= {
         ```
         Remove a chave "_casa_" e seu valor do dicionário 
 
+## Conjuntos
+
+Coleção não ordenada, possui valores distintos. É mutável
+
+```py
+meu_conjunto{item1,item2}
+```
+
+- Para remover:
+    ```py
+    meu_conjunto.remove(item1)
+    ```
 
 
 
