@@ -87,4 +87,19 @@ console.log(`Média da turma: ${media/notas.length}`);
     - Sem tipo. Geralmente usado para dizer que uma função ou método não retornam nada
 
 
+## User input (terminal)
+
+1. `npm i readline-sync @types/node`
+```ts 
+    //Modificar o tsconfig.json:
+    "types": ["node"]
+
+   // Usar a biblioteca:
+    const read = require('readline-sync')
+    const b1 = read.question('Bim1: ') 
+    const b2 = read.question('Bim2: ')
+
+```
+
+
 
