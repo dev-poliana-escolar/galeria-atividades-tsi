@@ -49,14 +49,38 @@ while (executanto){
         };
     
     }else if(op == 3){    
-        let date = new Date;
-        let data_user = read.question("Digite uma data no formato (dd/mm/aaaa): ");
-        console.log(date)
+       
+        const date_user = read.question("Digite uma data no formato (aaaa-mm-dd): ");
 
-    
+        // qduebrar a string e converter
+        const [anoStr, mesStr, diaStr] = date_user.split("-");
+        const ano = parseInt(anoStr);
+        const mes = parseInt(mesStr);
+        const dia = parseInt(diaStr);
+
+        // criar data no horário local
+        const data = new Date(ano, mes - 1, dia);
+
+        console.log(`Data digitada: ${dia.toString().padStart(2, "0")}/${mes.toString().padStart(2, "0")}/${ano}`);
+
+        // calcular diferença
+        const inicio_ano = new Date(ano, 0, 1);
+        const diffMs = data.getTime() - inicio_ano.getTime();
+        const diffDias = Math.floor(diffMs / (1000 * 60 * 60 * 24)) + 1;
+
+        console.log(`Dias passados desde 01/01/${ano}: ${diffDias}`);
+
 
     }else if (op ==4){
+        const aluno = {
+            nome: "Poliana Pinheiro",
+            matricula: "20251148060034",
+            curso: "Sistemas para Internet",
+            ira: 83.2
+        };
 
+        
+        console.log(`${aluno.nome} é aluna de ${aluno.curso} com matrícula ${aluno.matricula} e possui IRA ${aluno.ira}.`);
     }
    
     let op2 = read.question("Ver outra questão? (s/n):  ") 
