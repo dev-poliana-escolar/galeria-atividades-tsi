@@ -91,12 +91,40 @@ while (executanto) {
     else if (op == 3) {
         let primeiro_num;
         let segundo_num;
-        let lista_num;
-        primeiro_num = read.question("Digite o primeiro numero: ");
-        segundo_num = read.question("Digite o segundo numero: ");
-        // for(let intervalo = primeiro_num,  intervalo<, intervalo++){
-        //     lista_num.push(intervalo);
-        // }
+        let lista_num = [];
+        do {
+            primeiro_num = Number(read.question("Digite o primeiro numero: "));
+            segundo_num = Number(read.question("Digite o segundo numero: "));
+            if (primeiro_num > segundo_num) {
+                console.log("O primeiro número precisa ser maior que o segundo!");
+            }
+        } while (primeiro_num > segundo_num);
+        for (let intervalo = primeiro_num; intervalo <= segundo_num; intervalo++) {
+            lista_num.push(intervalo);
+        }
+        console.log(`Números no intervalo: ${lista_num}`);
+        let qtd_primos = 0;
+        lista_num.forEach(numero => {
+            let primo = true;
+            let divisor = numero - 1;
+            if (numero <= 1) {
+                primo = false;
+            }
+            else {
+                while (primo && divisor > 1) {
+                    if (numero % divisor == 0) {
+                        primo = false;
+                    }
+                    else {
+                        divisor -= 1;
+                    }
+                }
+            }
+            if (primo) {
+                qtd_primos++;
+            }
+        });
+        console.log(`Quantidade de números primos entre ${primeiro_num} e ${segundo_num}: ${qtd_primos}`);
     }
     let op2 = read.question("Ver outra questão? (s/n):  ");
     if (op2 == 's') {
