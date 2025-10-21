@@ -102,4 +102,15 @@ console.log(`Média da turma: ${media/notas.length}`);
 ```
 
 
+## Funções
+
+```ts
+        //parametro    o que pretende retornar 
+function exemplo (n:number) : boolean{ 
+    return false
+} 
+```
+> A estrutura é assim quando se quer retornar algum valor
+
+
 
