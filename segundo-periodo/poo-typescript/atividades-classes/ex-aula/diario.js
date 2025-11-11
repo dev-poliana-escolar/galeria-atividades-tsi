@@ -41,8 +41,12 @@ class RegistroNotas {
     set segunda_nota(nova_nota_dois) {
         this.#segunda_nota = nova_nota_dois;
     }
+    setSituacao(nova_situacao) {
+        this.#situacao_estudante = nova_situacao;
+        return `Situação alterada para: ${this.#situacao_estudante}`;
+    }
     getMediaParcial() {
-        if (this.#primeira_nota && this.#segunda_nota != 0) {
+        if (this.#primeira_nota != 0 && this.#segunda_nota != 0) {
             this.#media_parcial = ((this.#primeira_nota * 2) + (this.#segunda_nota * 3)) / 5;
             return this.#media_parcial;
         }
@@ -51,25 +55,33 @@ class RegistroNotas {
         }
     }
     getMediaFinal() {
-        if (this.#media_parcial) {
+        if (this.#media_parcial !== undefined) {
+            let situacao_final;
             if (this.#media_parcial >= 60) {
-                let situacao_final = this.#situacao_estudante = Situacao.aprovado;
-                return situacao_final;
+                situacao_final = this.#situacao_estudante = Situacao.aprovado;
             }
             else if (this.#media_parcial >= 10) {
-                let situacao_final = this.#situacao_estudante = Situacao.prova_final;
-                return situacao_final;
+                situacao_final = this.#situacao_estudante = Situacao.prova_final;
             }
-            return this.#media_final = this.#media_final;
+            else {
+                situacao_final = this.#situacao_estudante = Situacao.reprovado;
+            }
+            this.#media_final = this.#media_parcial;
+            return this.#media_final;
         }
         else {
-            return "nao tem parcial";
+            return "Não tem parcial";
         }
     }
+    getRegistros() {
+        return `Nome estudante:${this.#nome_estudante} - Situação: ${this.#situacao_estudante}`;
+    }
 }
-let reg_um = new RegistroNotas("Poliana", '202546777', 70, 2);
+let reg_um = new RegistroNotas("Poliana", '202546777', 70, 0);
 console.log(reg_um.getMediaParcial());
 console.log(reg_um.getMediaFinal());
+console.log(reg_um.setSituacao(Situacao.trancado));
+console.log(reg_um.getRegistros());
 class Diario {
     #nome_disciplina;
     #docente;
