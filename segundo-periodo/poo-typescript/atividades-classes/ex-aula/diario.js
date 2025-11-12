@@ -127,9 +127,9 @@ let reg_dois = new RegistroNotas("Alisson", '202546888', 80, 2);
 let reg_tres = new RegistroNotas("Tamires", '202546999', 20, 60);
 let reg_quatro = new RegistroNotas("Pedro", '202546101', 65.8, 89);
 let reg_cinco = new RegistroNotas("Hellen", '202546555', 80, 76);
-console.log(reg_um.getRegistros());
+reg_um.getRegistros();
 reg_tres.getMediaFinal(60);
-console.log(reg_tres.getRegistros());
+reg_tres.getRegistros();
 class Diario {
     #nome_disciplina;
     #docente;
@@ -138,14 +138,14 @@ class Diario {
     #codigo_turma;
     #qtd_aula;
     #registro_notas;
-    constructor(nomedisciplina, docente, turno, curso, cod_turma, qtd_aula, registro_notas) {
+    constructor(nomedisciplina, docente, turno, curso, cod_turma, qtd_aula, dados = []) {
         this.#nome_disciplina = nomedisciplina;
         this.#codigo_turma = cod_turma;
         this.#docente = docente;
         this.#curso = curso;
         this.#turno = turno;
         this.#qtd_aula = qtd_aula;
-        this.#registro_notas = registro_notas;
+        this.#registro_notas = dados;
     }
     set nomeDisciplina(nomedisciplina) {
         this.#nome_disciplina = nomedisciplina;
@@ -159,5 +159,26 @@ class Diario {
     set curso(novoCurso) {
         this.#curso = novoCurso;
     }
+    adicionarRegistros(novo_registro) {
+        this.#registro_notas.push(novo_registro);
+    }
+    obterRegistros() {
+        return this.#registro_notas.map((registro) => registro.getRegistros());
+    }
+    exibirDiario() {
+        const registros = this.#registro_notas
+            .map(r => {
+            const dados = r.getRegistros();
+            return `${dados.nome} (${dados.matricula}) - Média: ${dados.media_final ?? '-'} | Situação: ${dados.situacao}`;
+        })
+            .join('\n');
+        return `------------\nDisciplina: ${this.#nome_disciplina}\n------------\nCódigo da Turma: ${this.#codigo_turma}\nTurno: ${this.#turno}\nCurso: ${this.#curso}\n------\nQuantidade de aulas: ${this.#qtd_aula} - Docente: ${this.#docente}\n--------------------\nREGISTROS DE NOTAS\n----\n${registros}`;
+    }
 }
-let diarioUm = new Diario("Programação Orientada a Objetos", "Bruno", Turno.vespertino, "TSI", "2025", 120, [reg_um, reg_dois]);
+let diarioUm = new Diario("Programação Orientada a Objetos", "Bruno", Turno.vespertino, "TSI", "2025", 120);
+diarioUm.adicionarRegistros(reg_um);
+diarioUm.adicionarRegistros(reg_dois);
+diarioUm.adicionarRegistros(reg_tres);
+diarioUm.adicionarRegistros(reg_quatro);
+diarioUm.adicionarRegistros(reg_cinco);
+console.log(diarioUm.exibirDiario());
