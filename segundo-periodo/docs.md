@@ -50,3 +50,32 @@ class nomeClase{
    
 ---
 
+## Relacionamentos
+
+Todo programa é compostos por objetos que se relacionam entre em si.
+
+### Tipos de relacionamentos
+1. Associação
+2. Agregação
+3. COmposição
+4. Herança
+
+#### Associação
+Indica algum relacionamento de utilicação de um objeto. A não depende de B.
+Exemplo: Trem existe sem a Estrada de ferro, mas utiliza os trilhos
+
+- Multiplicidade de associações (Cardinalidade)
+
+#### Agregação
+
+Indica que uma classe é parte de outra classe.
+> Representado por um losango vazio, junto a classe do lado do todo
+Exemplo: Farol faz parte da locomotiva (Locomotiva <>---> Farol)
+
+#### Composição
+É uma agregação mais forte. Um objeto é **parte** essencial de outra classe
+> Representado por um losango preenchido de preto
+Exemplo: O trem não existe sem os vagões (Trem <.>---> Vagões)
+
+
+
