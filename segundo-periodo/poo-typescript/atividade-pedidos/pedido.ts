@@ -1,6 +1,3 @@
-import test = require("node:test");
-
-
 class Produto{
     #codigo:number;
     #valor:number;
