@@ -64,6 +64,8 @@ class Pedido{
         return this.#itens;
     }
 
+    get valor_total(){return this.#valor_total}
+
     set novo_valorTotal(novo_vt : number){
         this.#valor_total = novo_vt;
     }
@@ -94,9 +96,8 @@ class Pedido{
     }
 
     obterTotal(){
-        return {
-            valor: this.#itens.reduce((soma, item) => soma + item.obterSubtotal(), 0) // reduce para iterar, começa com o valor 0
-        }
+        this.#valor_total = this.#itens.reduce((soma, item) => soma + item.obterSubtotal(), 0) // reduce para iterar, começa com o valor 0
+        return this.#valor_total
     }
 
 
@@ -106,7 +107,7 @@ class Pedido{
 
 class Carrinho{
     #pedido : Pedido;
-    #cupom : undefined | number;
+    #cupom : number | undefined;
 
     constructor(pedido:Pedido, cupom : undefined | number){
         this.#pedido = pedido;
@@ -115,6 +116,10 @@ class Carrinho{
 
     set cupom (valor_cupom: number){
         this.#cupom = valor_cupom;
+    }
+
+    get pedido(){
+        return this.#pedido
     }
 
     obterCarrinho(){
@@ -159,17 +164,46 @@ class Carrinho{
     }
 
     // - aplicar um cupom de desconto que deve diminuir o valor a ser pago
-    aplicarCupom(valor_cupom : number){
+    aplicarCupom( percentual_cupom : number | undefined ){
+        let valor_original = this.#pedido.valor_total
+        let valor_final = 0;
+        this.#cupom = percentual_cupom
+
+        if (percentual_cupom){
+            // se for um cupom do tipo desconto de 20
+            let desconto_percentual = (percentual_cupom/100) * valor_original;
+            valor_final = valor_original - desconto_percentual;
+
+        }
+
+        
+
+        return valor_final
+       
+
         
 
     }
-    // - obter o total da compra
-    // - finalizar o pedido (deve criar um objeto pedido com os itens adicionados ao carrinho)
 
+    // - obter total e finalizar o pedido (deve criar um objeto pedido com os itens adicionados ao carrinho)
+    finalizarPedido(){
+        let pedido = this.obterCarrinho()
+        let valor = this.pedido.obterTotal()
+        let valor_a_ser_pago = this.aplicarCupom(this.#cupom)
+
+        return{
+            itens_do_pedido : pedido,
+            valor_total : valor,
+            valor_total_a_ser_pago: valor_a_ser_pago ? valor_a_ser_pago : valor
+
+        }
+
+    
+    }
 }
 
 // Produtos
-let sushi = new Produto(1,10,'Sushi clássico: Arroz japones, alga, salmão')
+let sushi = new Produto(1,5,'Sushi clássico: Arroz japones, alga, salmão')
 let temaki = new Produto(2,22,'Temaki clássico: Alga, arroz japones, pedaços de salmão');
 let yakisoba = new Produto(3,25,'Yakisoba clássico: Macarrão, legumes')
 
@@ -178,21 +212,32 @@ let yakisoba = new Produto(3,25,'Yakisoba clássico: Macarrão, legumes')
 
 let itemp1= new ItemPedido(1,sushi,2);
 let itemp2 = new ItemPedido(2,temaki,1);
+let itemp3= new ItemPedido(3, yakisoba,2)
 
 
 
 // Pedido
 
 let ped1= new Pedido()
+let ped2 = new Pedido()
 ped1.adicionarItem(itemp1);
+ped2.adicionarItem(itemp3);
+
 
 
 // console.log(ped1.itens);
 
+
+
 let car1 =new Carrinho(ped1,undefined);
+let car2 = new Carrinho(ped2, 10);
+
 console.log(car1.adicionarItem(itemp2));
-car1.alterarQtd(2,3)
-console.log(car1.removerItem(1))
-console.log(ped1.obterTotal())
-console.log(car1.obterCarrinho())
+// car1.alterarQtd(2,3)
+// console.log(car1.removerItem(1))
+// console.log(ped1.obterTotal())
+console.log(car1.aplicarCupom(20))
+// console.log(car1.obterCarrinho())
+console.log(car1.finalizarPedido())
+console.log(car2.finalizarPedido())
 
