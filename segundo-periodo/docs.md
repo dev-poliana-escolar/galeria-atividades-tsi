@@ -86,8 +86,8 @@ Exemplo: Farol faz parte da locomotiva (Locomotiva <>---> Farol)
 Exemplo: O trem não existe sem os vagões (Trem <.>---> Vagões)
 
 #### Herança 
-Um objeto é um (sub)tipo de outro
-
+Um objeto é um (sub)tipo de outro.
+1. Aproveitamento de atributos e métodos.
 Exemplo:
 ```
 Animal
@@ -96,6 +96,34 @@ Animal
     |--> Baleia
 
 ```
+
+- Para herdar de uma classe para outra
+```ts
+class NomeSubclasse extends NomeSuperclasse
+```
+```ts
+class Poligono{
+    protected numLados : number;
+    constructor(){
+        this.numLados = 0
+    }
+
+    obterNumeroLados(){
+        return this.numLados
+    }
+
+classs Triangulo extends Poligono{
+    constructor(){
+        super()
+        this.numLados = 3
+    }
+}
+
+let tri1: Triangulo = new Triangulo();
+```
+
+- Conceito de **polimorfismo**.
+
 ---
 
 # Abstração em POO
@@ -137,6 +165,8 @@ Exemplo de `type`:
 export type Curso = 'TSI' | 'REDES' | 'MECA' 
 
 ```
+
+
 
 
 
