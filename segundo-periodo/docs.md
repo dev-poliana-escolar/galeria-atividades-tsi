@@ -112,17 +112,47 @@ class Poligono{
         return this.numLados
     }
 
-classs Triangulo extends Poligono{
+class Triangulo extends Poligono{
     constructor(){
         super()
         this.numLados = 3
     }
 }
-
+}
 let tri1: Triangulo = new Triangulo();
 ```
 
 - Conceito de **polimorfismo**.
+
+## Classe Abstrata
+
+É um molde de classe que não pode ser instanciada diretamente, servindo como uma classe base para outras classes (subclasses) que herdam suas funcionalidades
+
+```ts
+class abstract Poligono{
+    protected numLados : number;
+    
+    constructor(){
+        this.numLados = 0
+    }
+
+    obterNumeroLados(){
+        return this.numLados
+    }
+
+    abstract calcularArea(): number | undefined; // obriga a todas as subclasses implementarem
+
+class Triangulo extends Poligono{
+    constructor(){
+        super()
+        this.numLados = 3
+    }
+}
+}
+
+let tri1: Triangulo = new Triangulo(); // não ira existir 'new Poligono()'
+```
+
 
 ---
 
